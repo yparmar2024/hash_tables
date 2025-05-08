@@ -1,0 +1,105 @@
+Scenario 1
+==========
+Start with an empty LinearHashTable.
+Fill it with `n` random values.
+Then run contains().
+m      |n      |Average accesses/contains
+-------+-------+-------------------------
+100    |0      |0.00
+4      |2      |1.14
+6      |3      |1.20
+8      |4      |1.24
+20     |10     |1.37
+50     |25     |1.47
+100    |25     |1.16
+1000   |25     |1.02
+1000   |50     |1.02
+1000   |100    |1.06
+1000   |200    |1.12
+1000   |500    |1.50
+1000   |750    |2.49
+1000   |900    |5.09
+1000   |950    |8.59
+1000   |975    |11.99
+2000   |1000   |1.51
+
+Scenario 2
+==========
+Start with an empty LinearHashTable.
+Fill it with `n` random values.
+Then, delete every item in it.
+Fill it with `n` new random values.
+Then run contains().
+m      |n      |Average accesses/contains
+-------+-------+-------------------------
+4      |2      |1.14
+100    |50     |1.46
+1000   |100    |1.06
+1000   |200    |1.12
+1000   |500    |1.52
+1000   |750    |2.47
+1000   |900    |4.92
+1000   |950    |7.95
+1000   |975    |12.06
+
+Scenario 3
+==========
+Start with an empty QuadraticHashTable, fill it up to n.
+Then run contains().
+m      |n      |Average accesses/contains
+-------+-------+-------------------------
+100    |0      |0.00
+4      |2      |1.15
+6      |3      |1.22
+8      |4      |1.19
+20     |10     |1.33
+50     |25     |1.38
+100    |50     |1.41
+100    |20     |1.11
+100    |10     |1.05
+1000   |50     |1.02
+2000   |1000   |1.44
+
+Questions
+=========
+When is a QuadraticHashTable better?
+------------------------------------
+A QuadraticHashTable is better as the ratio n/m gets larger.
+We can see in the LinearHashTable that as the ratio n/m approaches 1,
+the average accesses/contains become increasingly larger. In QuadraticHashTable,
+we can see that as the ratio n/m approaches 1, the average accesses/counts become
+increasingly larger. Therefore, the QuadraticHashTable performs better when the 
+ratio n/m gets larger.
+
+When is it worse?
+-----------------
+From our previous analysis, we know that LinearHashTable perform poorly against
+QuadraticHashTable as the ratio n/m approaches 1. Vice versa, the QuadraticHashTable
+will perform worse as the ratio n/m approaches 0.
+
+Is the number of queries dependent only on n and m, or something else as well?
+------------------------------------------------------------------------------
+The number of queries is dependent on n, m, and the probing strategy. As we've seen
+the LinearHashTable performs better as the ratio n/m approaches 0 and the QuadraticHashTable
+performs better as the ratio n/m approaches 1.
+
+Is this what you would expect given the theoretical explanations?
+-----------------------------------------------------------------
+Yes, we know that LinearHashTable performs poorly due to its ideology that it will
+go to the next available node after hashing. We know that n is the number of elements in
+the set and m is the maximum number of elements possible in the set. Therefore, with 
+LinearHashTable, as all of the elements get filled up to the maximum number of elements, 
+we are traversing one by one past the hash function, and that takes more time each time a element
+is added. Compared to QuadraticHashTable, where we skip around through powers of 2, which allows us 
+to visit more, but not visit some at all. So, yes, this is what I would expect given the theoretical
+explanations.
+
+Can you spot a pattern relating the average number of accesses and n and m?
+---------------------------------------------------------------------------
+For QuadraticHashTable, we can see that it's performance is worst optimized when the
+ratio n/m is at 0.5, therefore the further we are from 0.5, the better it performs.
+For the LinearHashTable, we can see that it's performance is best optimized when the
+ratio n/m is at 0.5, therefore the closer we are to 0.5, the better it performs. 
+The pattern that I can spot is an optimized one of the one earlier. The average number of
+accesses, n and m are related through the ratio n/m, where as the ratio increases, the 
+average accesses increase. 
